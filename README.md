@@ -1,12 +1,30 @@
-# React + Vite
+# MARKDOWN BLOG-SITE
+*Write your blogs with ease in Markdown format, and publish it instantly.
+This markdown editor support every paussible syntax of markdown, you require*.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+Hi,
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ This is a fully functional blogging web app which provides users to publish blogs with ease by the help of **Markdown Editor**
 
-## Expanding the ESLint configuration
+NOTE:  This repo only have frontend code, if you want to know about backend features and tech used, **[Visit here]()**.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Main features
+- Effortless blog writing in markdown editor, with **live preview**.
+- This markdown editor supports **all paussible markdwon syntax** you require to write a beautiful blog, like
+    
+    **Headings, Image, text-styles, mathematical formulas, HTML in markdown, code snippets, links etc.**
+- You are always **one click** away from publishing your blog.
+- Users also have access to **help** button, which instantly provide summary of main syntax used in any markdown editor.
+- It provides **privacy features** like **public and private profile** of users.
+- You can **search users by their username, blogs by their blogID**.
+- **Light and dark mode** is availbale, beacuse "Hey! this is a blogging site."
+- If you want to know about its **backned features, [visit here]()**.
+
+## Tech stack used (in frontend):
+
+- React
+- Tailwind CSS
+- shadcn
+- react-markdown
