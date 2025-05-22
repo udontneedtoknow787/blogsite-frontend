@@ -13,10 +13,10 @@ export const UniqueBlogPage = () => {
     const location = useLocation()
 
     const fetchBlog = async () => {
-        console.log("fetch request sent")
+        // console.log("fetch request sent")
         const res = await fetch(`${API}/blogs/?blogId=${location.search.split("=")[1]}`,)
         const response = await res.json()
-        console.log("Response = ",response)
+        // console.log("Response = ",response)
         if (!response.success) {
             alert(response.message)
         }
@@ -27,7 +27,7 @@ export const UniqueBlogPage = () => {
     }
 
     useEffect(() => {
-        console.log("location=", location)
+        // console.log("location=", location)
         if (location.state?.blog) {
             setBlog(location.state.blog)
             return
@@ -39,7 +39,7 @@ export const UniqueBlogPage = () => {
     }, [])
 
     // remember to remove this dark and manage it through dark button mode
-    return (<div className="dark min-h-screen min-w-full">
+    return (<div className="min-h-screen min-w-full">
         <Navbar />     
         <div className="flex justify-center px-4 sm:px-6 lg:px-8 py-10">
             <Card className="max-w-3xl w-full shadow-lg rounded-2xl">

@@ -15,7 +15,7 @@ export const PublicProfile = () => {
         try {
             const res = await fetch(`${API}/users/profile/${username}`)
             const response = await res.json()
-            console.log(response)
+            // console.log(response)
             if ("Response = ", response.success) {
                 setUser(response.data)
             }
@@ -31,7 +31,7 @@ export const PublicProfile = () => {
 
     return <>
         <Navbar />
-        <Card className="rounded-2xl shadow-lg p-6 hover:shadow-xl transition max-w-lg mx-auto">
+        <Card className="rounded-2xl shadow-lg p-6 hover:shadow-xl transition max-w-lg mx-auto mt-3">
             <CardHeader>
                 <CardTitle>Public Profile:</CardTitle>
             </CardHeader>

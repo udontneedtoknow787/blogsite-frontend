@@ -37,7 +37,7 @@ export const MarkDownEditor = () => {
                 },
             )
             const response = await res.json()
-            console.log(response)
+            // console.log(response)
             alert(response.message)
             if (response.success) {
                 setUser(response.data.user)
@@ -65,7 +65,7 @@ export const MarkDownEditor = () => {
         <Button onClick={handleUpload}>SUBMIT</Button>
         <MarkdownInfoComponent />
         <div className="border p-3 mt-2 markdown-body">
-            <h1 className="text-xl font-bold mb-3">Markdown Preview:</h1>
+            <h1 className="text-xl font-bold mb-3 md:mb-6">Markdown Preview:</h1>
             <Markdown
             rehypePlugins={[remarkGfm, rehypeRaw, rehypeKatex]}
             remarkPlugins={[remarkMath]}
@@ -91,7 +91,7 @@ export const MarkDownEditor = () => {
 export const EditorForMarkdown = ({children}) => {
     return (
         <div className="border p-3 mt-2 markdown-body">
-            <h1 className="text-xl font-bold mb-3">Markdown Preview:</h1>
+            {/* <h1 className="text-xl font-bold mb-3 md:mb-6">Markdown Preview:</h1> */}
             <Markdown
             rehypePlugins={[remarkGfm, rehypeRaw, rehypeKatex]}
             remarkPlugins={[remarkMath]}

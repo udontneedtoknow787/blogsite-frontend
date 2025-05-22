@@ -2,7 +2,7 @@ import React from "react"
 
 
 export const ThemeContext = React.createContext({
-    theme: "dark",
+    theme: localStorage.getItem("theme") || "dark",
     lightTheme: () => {},
     darkTheme: () => {}
 })

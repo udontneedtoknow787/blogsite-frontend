@@ -59,6 +59,8 @@ export default function LandingPage() {
           </CardContent>
         </Card>
       </div>
+      <div> <p className=" mt-6 text-sm text-red-700"> NOTE: Sometimes, It may take more than 1 minute to load blogs/profiles initially. <br />
+       Please wait atleast 1 minutes when you are sending database query for the first time. </p></div>
     </div>
   );
 }

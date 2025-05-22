@@ -23,7 +23,7 @@ export const RegisterPage = () => {
     const navigate = useNavigate()
 
     const registerRequest = async () => {
-        console.log(`username:${username}, password:${password}`)
+        // console.log(`username:${username}, password:${password}`)
         try {
             const res = await fetch(`${API}/users/register`,
                 {
@@ -41,7 +41,7 @@ export const RegisterPage = () => {
                 },
             )
             const response = await res.json()
-            console.log(response)
+            // console.log(response)
             alert(response.message)
             if(response.success){
                 setUser(response.data)
@@ -56,7 +56,7 @@ export const RegisterPage = () => {
         }
     }
 
-    return <div className="bg-slate-400 dark flex items-center justify-center h-screen">
+    return <div className="bg-slate-400 flex items-center justify-center h-screen">
         <Card>
             <CardHeader>
                 <CardTitle>New User Registeration</CardTitle>

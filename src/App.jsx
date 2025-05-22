@@ -14,11 +14,12 @@ import UserContextProvider from './context/userContext'
 import { EmailVerificationPage } from './pages/email-verification'
 
 function App() {
-  const [theme, setTheme] = useState("dark")
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark")
   const lightTheme = () => {setTheme("light")}
   const darkTheme = () => {setTheme("dark")}
   // classic js used to change theme
   useEffect(()=>{
+    localStorage.setItem("theme", theme)
     document.querySelector('html').classList.remove("light", "dark")
     document.querySelector('html').classList.add(theme)
   },[theme])
@@ -30,7 +31,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          <Route path='/profile/username' element={<PublicProfile />} />
+          <Route path='/profile/:username' element={<PublicProfile />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/blogs' element={<BlogsPage />} />

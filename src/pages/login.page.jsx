@@ -23,7 +23,7 @@ export const LoginPage = () => {
 
 
     const loginRequest = async () => {
-        console.log(`username:${username}, password:${password}`)
+        // console.log(`username:${username}, password:${password}`)
         try {
             const res = await fetch(`${API}/users/login`,
                 {
@@ -39,7 +39,7 @@ export const LoginPage = () => {
                 },
             )
             const response = await res.json()
-            console.log(response)
+            // console.log(response)
             alert(response.message)
             if(response.success){
                 localStorage.setItem("accessToken", response.data.accessToken)
@@ -48,13 +48,13 @@ export const LoginPage = () => {
                 navigate("/dashboard")
             }
         } catch (error) {
-            alert(error)
+            // alert(error)
             console.error(error)
         }
     }
 
 
-    return <div className="bg-slate-400 dark flex items-center justify-center h-screen">
+    return <div className="bg-slate-400 flex items-center justify-center h-screen">
         <Card>
             <CardHeader>
                 <CardTitle>User Login</CardTitle>

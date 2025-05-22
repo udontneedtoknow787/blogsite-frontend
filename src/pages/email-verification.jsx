@@ -21,7 +21,7 @@ export const EmailVerificationPage = () => {
     const navigate = useNavigate()
 
     const verifyRequest = async () => {
-        console.log(`userId:${userId}, OTP:${otp}`)
+        // console.log(`userId:${userId}, OTP:${otp}`)
         try {
             const res = await fetch(`${API}/users/verify`,
                 {
@@ -37,7 +37,7 @@ export const EmailVerificationPage = () => {
                 },
             )
             const response = await res.json()
-            console.log(response)
+            // console.log(response)
             alert(response.message)
             if (response.success) {
                 setUser(null)
@@ -49,7 +49,7 @@ export const EmailVerificationPage = () => {
         }
     }
 
-    return <div className="bg-slate-400 dark flex items-center justify-center h-screen">
+    return <div className="bg-slate-400 flex items-center justify-center h-screen">
         <Card>
             <CardHeader>
                 <CardTitle>Email Verification</CardTitle>
