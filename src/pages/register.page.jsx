@@ -46,7 +46,10 @@ export const RegisterPage = () => {
             if(response.success){
                 setUser(response.data)
                 localStorage.setItem("user", JSON.stringify(response.data))
-                navigate("/dashboard")
+                if(response.data.isVerified){
+                    navigate("/dashboard")
+                }
+                navigate("/verify-email")
             }
         } catch (error) {
             console.error(error)

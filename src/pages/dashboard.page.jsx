@@ -33,7 +33,7 @@ export const DashboardPage = () => {
                     <CardTitle>User Profile</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <p><strong>ID:</strong> {user._id}</p>
                         <p><strong>Username:</strong> {user.username}</p>
                         <p><strong>Full Name:</strong> {user.fullname}</p>
@@ -57,7 +57,7 @@ export const DashboardPage = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {user.blogs?.reverse().map((blogId) => (
+                            {user.blogs.map((blogId) => (
                                 <TableRow key={blogId}>
                                     <TableCell>{blogId}</TableCell>
                                     <TableCell>

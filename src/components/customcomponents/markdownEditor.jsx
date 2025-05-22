@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Input } from "../ui/input"
 import { Textarea } from "../ui/textarea"
 import { Label } from "../ui/label"
@@ -11,10 +11,12 @@ import remarkMath from "remark-math"
 import rehypeRaw from "rehype-raw"
 import 'katex/dist/katex.min.css';
 import rehypeKatex from "rehype-katex"
+import { UserContext } from "@/context/userContext"
 
 
 export const MarkDownEditor = () => {
     const API = import.meta.env.VITE_API_BASE_URL
+    const {user, setUser} = useContext(UserContext)
     const [title, setTitle] = useState("")
     const [markdown, setMarkdown] = useState('# Hi, *Pluto*!')
     const navigate = useNavigate()
@@ -38,7 +40,9 @@ export const MarkDownEditor = () => {
             console.log(response)
             alert(response.message)
             if (response.success) {
-                navigate(`/blog/u/?blogid=${response.data._id}`, { state: { blog: response.data } })
+                setUser(response.data.user)
+                localStorage.setItem("user", JSON.stringify(response.data.user))
+                navigate(`/blog/u/?blogid=${response.data.blog._id}`, { state: { blog: response.data.blog } })
             }
         } catch (error) {
             console.error(error)
@@ -70,7 +74,7 @@ export const MarkDownEditor = () => {
                     <img
                         src={src}
                         alt={alt}
-                        className="max-w-md h-auto rounded-lg shadow-md" // Tailwind classes for styling
+                        className="max-w-md h-auto m-auto rounded-lg shadow-md" // Tailwind classes for styling
                     />
                 ),
                 pre: ({children}) => (

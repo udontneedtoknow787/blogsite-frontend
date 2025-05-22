@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { LogoutButton } from "./logoutbutton"
 import { useState } from "react";
 import { ThemeButton } from "./themebtn";
+import { SearchButton } from "./searchbtn";
 
 export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -30,9 +31,10 @@ export const Navbar = () => {
                         <a href="/editor" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">
                             Create
                         </a>
-                        <a href="/blog/u/?blogId=" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">
+                        {/* <a href="/blog/u/?blogId=" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">
                             search(by ID)
-                        </a>
+                        </a> */}
+                        <SearchButton />
                         <LogoutButton />
                         <ThemeButton />
                     </div>
@@ -57,12 +59,14 @@ export const Navbar = () => {
                     <a href="/blogs" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
                         Blogs
                     </a>
-                    <a href="/login" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
-                        Login
+                    <a href="/editor" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
+                        Create
                     </a>
-                    <a href="/" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
-                        Landing Page
-                    </a>
+                    {/* <a href="/blog/u/?blogId=" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">
+                            search(by ID)
+                        </a> */}
+                    <SearchButton />
+                    <LogoutButton />
                     <ThemeButton />
                 </div>
             </div>
