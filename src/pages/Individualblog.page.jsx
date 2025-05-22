@@ -13,10 +13,10 @@ export const UniqueBlogPage = () => {
     const location = useLocation()
 
     const fetchBlog = async () => {
-        console.log("fetch request sent")
+        // console.log("fetch request sent")
         const res = await fetch(`${API}/blogs/?blogId=${location.search.split("=")[1]}`,)
         const response = await res.json()
-        console.log("Response = ",response)
+        // console.log("Response = ",response)
         if (!response.success) {
             alert(response.message)
         }
@@ -27,7 +27,7 @@ export const UniqueBlogPage = () => {
     }
 
     useEffect(() => {
-        console.log("location=", location)
+        // console.log("location=", location)
         if (location.state?.blog) {
             setBlog(location.state.blog)
             return
