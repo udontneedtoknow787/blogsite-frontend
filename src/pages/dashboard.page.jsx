@@ -8,10 +8,36 @@ import { Button } from "@/components/ui/button";
 
 export const DashboardPage = () => {
     const navigate = useNavigate()
-    const { user } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
 
     const handleView = (blogID) => {
         navigate(`/blog/u/?blogID=${blogID}`)
+    }
+    const handleDelete = async (blogID) => {
+        const API = import.meta.env.VITE_API_BASE_URL
+        try {
+            const res = await fetch(`${API}/blogs/delete-blog/?blogId=${blogID}`, {
+                method: "DELETE",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+            const response = await res.json()
+            if (response.success) {
+                alert("Blog deleted successfully!")
+                // Optionally, you can refresh the user data or redirect
+                setUser({...user, blogs: response.data.updatedBlogs})
+                localStorage.setItem("user", JSON.stringify({...user, blogs: response.data.updatedBlogs}))
+                navigate("/dashboard")
+            } else {
+                alert("Error deleting blog: " + response.message)
+            }
+        } catch (error) {
+            console.error("Error deleting blog:", error);
+            alert("Error deleting blog: " + error.message);
+            return;
+        }
     }
 
     if (!(user && user?._id)) {
@@ -62,6 +88,9 @@ export const DashboardPage = () => {
                                     <TableCell>{blogId}</TableCell>
                                     <TableCell>
                                         <Button onClick={() => {handleView(blogId)}} variant="outline">View</Button>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button onClick={() => {handleDelete(blogId)}} variant="destructive">Delete</Button>
                                     </TableCell>
                                 </TableRow>
                             ))}

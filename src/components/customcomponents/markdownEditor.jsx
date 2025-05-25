@@ -100,7 +100,7 @@ export const EditorForMarkdown = ({children}) => {
                     <img
                         src={src}
                         alt={alt}
-                        className="max-w-md h-auto rounded-lg shadow-md" // Tailwind classes for styling
+                        className="block mx-auto max-w-8/12 lg:max-w-9/12 h-auto rounded-lg shadow-md" // Tailwind classes for styling
                     />
                 ),
                 pre: ({children}) => (

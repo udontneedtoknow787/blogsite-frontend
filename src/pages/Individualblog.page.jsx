@@ -6,14 +6,18 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Navbar } from "@/components/customcomponents/navbar"
 import { EditorForMarkdown } from "@/components/customcomponents/markdownEditor"
+import LoadingPage from "@/components/customcomponents/loading-page"
+import ShareButton from "@/components/customcomponents/share-button"
 
 export const UniqueBlogPage = () => {
     const API = import.meta.env.VITE_API_BASE_URL
     const [blog, setBlog] = useState({})
+    const [loading, setLoading] = useState(true)
     const location = useLocation()
 
     const fetchBlog = async () => {
         // console.log("fetch request sent")
+        setLoading(true)
         const res = await fetch(`${API}/blogs/?blogId=${location.search.split("=")[1]}`,)
         const response = await res.json()
         // console.log("Response = ",response)
@@ -22,6 +26,7 @@ export const UniqueBlogPage = () => {
         }
         else{
             setBlog(response.data)
+            setLoading(false)
             location.state = {blog: response.data}
         } 
     }
@@ -29,6 +34,8 @@ export const UniqueBlogPage = () => {
     useEffect(() => {
         // console.log("location=", location)
         if (location.state?.blog) {
+            // console.log("Blog found in location state", location.state.blog)
+            setLoading(false)
             setBlog(location.state.blog)
             return
         }
@@ -40,8 +47,11 @@ export const UniqueBlogPage = () => {
 
     // remember to remove this dark and manage it through dark button mode
     return (<div className="min-h-screen min-w-full">
-        <Navbar />     
+        <Navbar />
+        {loading ? <LoadingPage /> : null}    
         <div className="flex justify-center px-4 sm:px-6 lg:px-8 py-10">
+            <title>{blog.title}</title>
+            <meta property="og:title" content={blog.title} />
             <Card className="max-w-3xl w-full shadow-lg rounded-2xl">
                 <CardContent className="p-6 sm:p-10">
                     {/* Title */}
@@ -70,7 +80,7 @@ export const UniqueBlogPage = () => {
 
                     {/* CTA Button */}
                     <div className="mt-6 flex justify-end">
-                        <Button variant="outline">Share Blog</Button>
+                        <ShareButton />
                     </div>
                 </CardContent>
             </Card>

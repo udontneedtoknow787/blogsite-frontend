@@ -30,6 +30,9 @@ export const LogoutButton = () => {
             navigate("/login")
         } catch (error) {
             console.log(error)
+            setUser(null)
+            localStorage.removeItem("user")
+            navigate("/login")
         }
     }
 
