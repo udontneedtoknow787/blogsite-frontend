@@ -73,8 +73,9 @@ export const LoginPage = () => {
                     </div>
                 </form>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex flex-col space-y-4">
             <Button onClick={loginRequest} variant="default">Submit</Button>
+            <a className="block text-sm underline" href="/request-otp">Forget password</a>
             </CardFooter>
         </Card>
     </div>

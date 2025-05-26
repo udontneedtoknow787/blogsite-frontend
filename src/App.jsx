@@ -12,6 +12,8 @@ import { ThemeContextProvider } from './context/themeContext'
 import { useEffect, useState } from 'react'
 import UserContextProvider from './context/userContext'
 import { EmailVerificationPage } from './pages/email-verification'
+import { RequestOTPPage } from './pages/request-otp'
+import { UpdatePasswordPage } from './pages/update-password'
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark")
@@ -39,6 +41,8 @@ function App() {
           <Route path='/dashboard' element={<DashboardPage />} />
           <Route path='/editor' element={<CreateBlogPage />} />
           <Route path='/verify-email' element={<EmailVerificationPage />} />
+          <Route path='/request-otp' element={<RequestOTPPage />} />
+          <Route path='/update-password' element={<UpdatePasswordPage />} />
         </Routes>
       </BrowserRouter>
       </UserContextProvider>

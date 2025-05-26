@@ -65,6 +65,7 @@ export const DashboardPage = () => {
                         <p><strong>Full Name:</strong> {user.fullname}</p>
                         <p><strong>Email:</strong> {user.email}</p>
                         <p><strong>Joined:</strong> {user.createdAt}</p>
+                        <p><strong>Change Password : </strong><a className="underline" href="/update-password">Here</a></p>
                     </div>
                 </CardContent>
             </Card>

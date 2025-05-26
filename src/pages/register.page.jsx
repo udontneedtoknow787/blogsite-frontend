@@ -52,7 +52,7 @@ export const RegisterPage = () => {
                 navigate("/verify-email")
             }
         } catch (error) {
-            console.error(error)
+            console.error("Something went wrong: ", error)
         }
     }
 

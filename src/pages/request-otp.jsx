@@ -13,17 +13,18 @@ import { UserContext } from "@/context/userContext"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export const EmailVerificationPage = () => {
-    const API = import.meta.env.VITE_API_BASE_URL
-    const { user, setUser } = useContext(UserContext)
-    const [userId, setUserId] = useState(user?._id || "")
-    const [otp, setOtp] = useState("")
-    const navigate = useNavigate()
 
-    const verifyRequest = async () => {
-        // console.log(`userId:${userId}, OTP:${otp}`)
+export const RequestOTPPage = () => {
+    const navigate = useNavigate()
+    const API = import.meta.env.VITE_API_BASE_URL
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+
+
+    const requestOtp = async () => {
+        // console.log(`username:${username}, password:${password}`)
         try {
-            const res = await fetch(`${API}/users/verify`,
+            const res = await fetch(`${API}/users/request-otp`,
                 {
                     method: "POST",
                     credentials: "include",
@@ -31,48 +32,46 @@ export const EmailVerificationPage = () => {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        userId: userId,
-                        otp: otp,
+                        username: username,
+                        email: email
                     }),
                 },
             )
             const response = await res.json()
             // console.log(response)
             alert(response.message)
-            if (response.success) {
-                setUser(response.data.user)
-                localStorage.setItem("user", JSON.stringify(response.data.user))
-                navigate("/dashboard")
+            if(response.success){
+                navigate("/verify-email")
             }
         } catch (error) {
+            alert("An error occurred while requesting OTP. Please try again after sometime.")
             console.error(error)
+            navigate("/")
         }
     }
+
 
     return <div className="bg-slate-400 flex items-center justify-center h-screen">
         <Card>
             <CardHeader>
-                <CardTitle>Email Verification</CardTitle>
+                <CardTitle>User Login</CardTitle>
             </CardHeader>
             <CardContent>
                 <form>
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="name">UserId *</Label>
-                            <Input id="name" value={userId} placeholder="username" onChange={(e) => { setUserId(e.target.value) }} />
+                            <Label htmlFor="name">Username</Label>
+                            <Input id="name" placeholder="username" onChange={(e)=>{setUsername(e.target.value)}} />
                         </div>
                         <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="framework"> OTP </Label>
-                            <Input type="password" id="password" placeholder="password" onChange={(e) => { setOtp(e.target.value) }} />
+                            <Label htmlFor="email">Email</Label>
+                            <Input type="email" id="email" placeholder="email" onChange={(e)=>{setEmail(e.target.value)}} />
                         </div>
                     </div>
                 </form>
             </CardContent>
             <CardFooter>
-                <div className="flex flex-col space-y-4">
-                    <p className="text-xs text-red-600">* your OTP will be expired in 10 minutes.</p>
-                    <Button onClick={verifyRequest} variant="default">Submit</Button>
-                </div>
+            <Button onClick={requestOtp} variant="default">Submit</Button>
             </CardFooter>
         </Card>
     </div>
