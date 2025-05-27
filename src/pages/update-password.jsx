@@ -1,3 +1,4 @@
+import MiniLoadingIcon from "@/components/customcomponents/mini-loading-icon"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -19,6 +20,7 @@ export const UpdatePasswordPage = () => {
     const API = import.meta.env.VITE_API_BASE_URL
     const [confirmPassword, setConfirmPassword] = useState("")
     const [password, setPassword] = useState("")
+    const [waiting, setWaiting] = useState(false)
 
 
     const updateRequest = async () => {
@@ -26,6 +28,11 @@ export const UpdatePasswordPage = () => {
             alert("Passwords do not match")
             return
         }
+        if(waiting){
+            alert("Please wait for the previous request to complete")
+            return
+        }
+        setWaiting(true)
         try {
             const res = await fetch(`${API}/users/update-password`,
                 {
@@ -40,12 +47,14 @@ export const UpdatePasswordPage = () => {
                 },
             )
             const response = await res.json()
+            setWaiting(false)
             // console.log(response)
             alert(response.message)
             if(response.success){
                 navigate("/dashboard")
             }
         } catch (error) {
+            setWaiting(false)
             alert("Something went wrong : ", error)
             console.error(error)
         }
@@ -73,6 +82,7 @@ export const UpdatePasswordPage = () => {
             </CardContent>
             <CardFooter>
             <Button onClick={updateRequest} variant="default">Submit</Button>
+            {waiting && <MiniLoadingIcon />}
             </CardFooter>
         </Card>
     </div>

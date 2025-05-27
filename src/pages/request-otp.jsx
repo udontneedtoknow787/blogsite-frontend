@@ -1,3 +1,4 @@
+import MiniLoadingIcon from "@/components/customcomponents/mini-loading-icon"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -19,10 +20,20 @@ export const RequestOTPPage = () => {
     const API = import.meta.env.VITE_API_BASE_URL
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
+    const [waiting, setWaiting] = useState(false)
 
 
     const requestOtp = async () => {
         // console.log(`username:${username}, password:${password}`)
+        if (!username || !email) {
+            alert("Please fill in all fields")
+            return
+        }
+        if (waiting) {
+            alert("Please wait for the previous request to complete")
+            return
+        }
+        setWaiting(true)
         try {
             const res = await fetch(`${API}/users/request-otp`,
                 {
@@ -38,12 +49,14 @@ export const RequestOTPPage = () => {
                 },
             )
             const response = await res.json()
+            setWaiting(false)
             // console.log(response)
             alert(response.message)
             if(response.success){
                 navigate("/verify-email")
             }
         } catch (error) {
+            setWaiting(false)
             alert("An error occurred while requesting OTP. Please try again after sometime.")
             console.error(error)
             navigate("/")
@@ -72,6 +85,7 @@ export const RequestOTPPage = () => {
             </CardContent>
             <CardFooter>
             <Button onClick={requestOtp} variant="default">Submit</Button>
+            {waiting && <MiniLoadingIcon />}
             </CardFooter>
         </Card>
     </div>

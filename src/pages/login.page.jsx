@@ -1,3 +1,4 @@
+import MiniLoadingIcon from "@/components/customcomponents/mini-loading-icon"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -20,10 +21,25 @@ export const LoginPage = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const {setUser} = useContext(UserContext)
+    const [waiting, setWaiting] = useState(false)
 
 
     const loginRequest = async () => {
         // console.log(`username:${username}, password:${password}`)
+        if (!username || !password) {
+            alert("Please fill in all fields")
+            return
+        }
+        if (waiting) {
+            alert("Please wait for the previous request to complete")
+            return
+        }
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long")
+            setWaiting(false)
+            return
+        }
+        setWaiting(true)
         try {
             const res = await fetch(`${API}/users/login`,
                 {
@@ -39,6 +55,7 @@ export const LoginPage = () => {
                 },
             )
             const response = await res.json()
+            setWaiting(false)
             // console.log(response)
             alert(response.message)
             if(response.success){
@@ -48,6 +65,7 @@ export const LoginPage = () => {
                 navigate("/dashboard")
             }
         } catch (error) {
+            setWaiting(false)
             // alert(error)
             console.error(error)
         }
@@ -75,6 +93,7 @@ export const LoginPage = () => {
             </CardContent>
             <CardFooter className="flex flex-col space-y-4">
             <Button onClick={loginRequest} variant="default">Submit</Button>
+            {waiting && <MiniLoadingIcon />}
             <a className="block text-sm underline" href="/request-otp">Forget password</a>
             </CardFooter>
         </Card>

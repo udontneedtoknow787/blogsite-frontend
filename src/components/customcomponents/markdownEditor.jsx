@@ -12,6 +12,7 @@ import rehypeRaw from "rehype-raw"
 import 'katex/dist/katex.min.css';
 import rehypeKatex from "rehype-katex"
 import { UserContext } from "@/context/userContext"
+import MiniLoadingIcon from "./mini-loading-icon"
 
 
 export const MarkDownEditor = () => {
@@ -19,9 +20,11 @@ export const MarkDownEditor = () => {
     const {user, setUser} = useContext(UserContext)
     const [title, setTitle] = useState("")
     const [markdown, setMarkdown] = useState('# Hi, *Pluto*!')
+    const [waiting, setWaiting] = useState(false)
     const navigate = useNavigate()
 
     const handleUpload = async () => {
+        setWaiting(true)
         try {
             const res = await fetch(`${API}/blogs/post-blog`,
                 {
@@ -37,6 +40,7 @@ export const MarkDownEditor = () => {
                 },
             )
             const response = await res.json()
+            setWaiting(false)
             // console.log(response)
             alert(response.message)
             if (response.success) {
@@ -45,6 +49,7 @@ export const MarkDownEditor = () => {
                 navigate(`/blog/u/?blogid=${response.data.blog._id}`, { state: { blog: response.data.blog } })
             }
         } catch (error) {
+            setWaiting(false)
             console.error(error)
         }
     }
@@ -63,6 +68,7 @@ export const MarkDownEditor = () => {
             />
         </div>
         <Button onClick={handleUpload}>SUBMIT</Button>
+        {waiting && <MiniLoadingIcon />}
         <MarkdownInfoComponent />
         <div className="border p-3 mt-2 markdown-body">
             <h1 className="text-xl font-bold mb-3 md:mb-6">Markdown Preview:</h1>

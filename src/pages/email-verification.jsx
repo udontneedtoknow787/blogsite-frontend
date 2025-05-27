@@ -1,3 +1,4 @@
+import MiniLoadingIcon from "@/components/customcomponents/mini-loading-icon"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -18,10 +19,20 @@ export const EmailVerificationPage = () => {
     const { user, setUser } = useContext(UserContext)
     const [userId, setUserId] = useState(user?._id || "")
     const [otp, setOtp] = useState("")
+    const [waiting, setWaiting] = useState(false)
     const navigate = useNavigate()
 
     const verifyRequest = async () => {
         // console.log(`userId:${userId}, OTP:${otp}`)
+        if (!userId || !otp) {
+            alert("Please fill in all fields")
+            return
+        }
+        if (waiting) {
+            alert("Please wait for the previous request to complete")
+            return
+        }
+        setWaiting(true)
         try {
             const res = await fetch(`${API}/users/verify`,
                 {
@@ -37,6 +48,7 @@ export const EmailVerificationPage = () => {
                 },
             )
             const response = await res.json()
+            setWaiting(false)
             // console.log(response)
             alert(response.message)
             if (response.success) {
@@ -45,6 +57,7 @@ export const EmailVerificationPage = () => {
                 navigate("/dashboard")
             }
         } catch (error) {
+            setWaiting(false)
             console.error(error)
         }
     }
@@ -72,6 +85,7 @@ export const EmailVerificationPage = () => {
                 <div className="flex flex-col space-y-4">
                     <p className="text-xs text-red-600">* your OTP will be expired in 10 minutes.</p>
                     <Button onClick={verifyRequest} variant="default">Submit</Button>
+                    {waiting && <MiniLoadingIcon />}
                 </div>
             </CardFooter>
         </Card>
