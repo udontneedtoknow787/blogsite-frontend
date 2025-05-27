@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label"
 import { UserContext } from "@/context/userContext"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 export const RegisterPage = () => {
     const API = import.meta.env.VITE_API_BASE_URL
@@ -60,7 +61,12 @@ export const RegisterPage = () => {
             const response = await res.json()
             setWaiting(false)
             // console.log(response)
-            alert(response.message)
+            // alert(response.message)
+            toast(response.message, {
+                description: response.success ? "Registration successful" : "Failed to register",
+                duration: 3000,
+                variant: response.success ? "success" : "destructive"
+            })
             if(response.success){
                 setUser(response.data)
                 localStorage.setItem("user", JSON.stringify(response.data))

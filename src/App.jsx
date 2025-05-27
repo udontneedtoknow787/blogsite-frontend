@@ -14,6 +14,7 @@ import UserContextProvider from './context/userContext'
 import { EmailVerificationPage } from './pages/email-verification'
 import { RequestOTPPage } from './pages/request-otp'
 import { UpdatePasswordPage } from './pages/update-password'
+import { Toaster } from 'sonner'
 
 function App() {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark")
@@ -45,6 +46,7 @@ function App() {
           <Route path='/update-password' element={<UpdatePasswordPage />} />
         </Routes>
       </BrowserRouter>
+      <Toaster />
       </UserContextProvider>
       </ThemeContextProvider>
     </>

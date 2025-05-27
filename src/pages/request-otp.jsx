@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label"
 import { UserContext } from "@/context/userContext"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 
 export const RequestOTPPage = () => {
@@ -51,7 +52,12 @@ export const RequestOTPPage = () => {
             const response = await res.json()
             setWaiting(false)
             // console.log(response)
-            alert(response.message)
+            // alert(response.message)
+            toast(response.message, {
+                description: response.success ? "OTP sent successfully" : "Failed to send OTP",
+                duration: 3000,
+                variant: response.success ? "success" : "destructive"
+            })
             if(response.success){
                 navigate("/verify-email")
             }
