@@ -59,8 +59,22 @@ export default function LandingPage() {
           </CardContent>
         </Card>
       </div>
-      <div> <p className=" mt-6 text-sm text-red-700"> NOTE: Sometimes, It may take more than 1 minute to load blogs/profiles initially. <br />
-       Please wait atleast 1 minute when you are sending database query for the first time. </p></div>
+      {/* <div> <p className=" mt-6 text-sm text-red-700"> NOTE: Sometimes, It may take more than 1 minute to load blogs/profiles initially. <br />
+        Please wait atleast 1 minute when you are sending database query for the first time. </p>
+      </div> */}
+      <div className="w-full flex justify-center items-center h-12 border-t border-gray-300 bg-white dark:bg-gray-800 fixed bottom-0 left-0 text-xs text-gray-500 z-50">
+       Designed & developed by 
+        <a
+          href="https://www.linkedin.com/in/raj-kumar787"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="ml-1 underline hover:text-blue-600"
+        >
+          Raj Kumar
+        </a>
+      </div>
     </div>
+
+
   );
 }
