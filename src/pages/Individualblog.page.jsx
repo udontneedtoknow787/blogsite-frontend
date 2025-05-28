@@ -61,7 +61,7 @@ export const UniqueBlogPage = () => {
 
                     {/* Author and Date */}
                     <div className="mt-4 flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-                        <span>By {blog.authorname || "Anonymous"}</span>
+                        <span>By @{blog.authorname || "Anonymous"}</span>
                         <span>{blog.createdAt || "20XX"}</span>
                     </div>
 

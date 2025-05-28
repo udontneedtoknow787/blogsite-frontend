@@ -10,7 +10,7 @@ import Markdown from "react-markdown"
 import remarkGfm from "remark-gfm";
 
 const MarkdownFunctionsTable = `
-|NOTE: Search this Blog for detailed information (blogId=67d9bf8b5a1b90fe8ba75869)|
+|NOTE: Search this Blog for detailed information (blogId=68367a5bb1684776687d5487)|
 | Markdown Syntax    | Description                         | Example |
 |--------------------|-------------------------------------|---------|
 | \`# Heading 1\`     | Creates a large heading           | # Heading 1 |

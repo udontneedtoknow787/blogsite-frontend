@@ -16,8 +16,8 @@ export const BlogsPage = () => {
         setLoading(true)
         setBlogs([])
         try {
-            console.log(API)
-            console.log("fetch request sent for page:", page, " limit: 18")
+            // console.log(API)
+            // console.log("fetch request sent for page:", page, " limit: 18")
             const res = await fetch(`${API}/blogs/allblogs`, {
                 method: "POST",
                 credentials: "include",
@@ -31,8 +31,8 @@ export const BlogsPage = () => {
                 }),
             })
             const response = await res.json()
-            console.log(response)
-            console.log("fetch request completed for page:", page, " limit: 12")
+            // console.log(response)
+            // console.log("fetch request completed for page:", page, " limit: 12")
             if(response.success === false && response.statuscode === 405) {
                 console.log("No more blogs to show!")
                 setLoading(false);

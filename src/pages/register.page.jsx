@@ -64,7 +64,7 @@ export const RegisterPage = () => {
             // alert(response.message)
             toast(response.message, {
                 description: response.success ? "Registration successful" : "Failed to register",
-                duration: 3000,
+                duration: 5000,
                 variant: response.success ? "success" : "destructive"
             })
             if(response.success){

@@ -41,7 +41,7 @@ export const DashboardPage = () => {
     }
 
     if (!(user && user?._id)) {
-        console.log(user)
+        // console.log(user)
         return <div>
             <Navbar />
             <div>

@@ -53,7 +53,7 @@ export const UpdatePasswordPage = () => {
             // alert(response.message)
             toast(response.message, {
                 description: response.success ? "Password updated successfully" : "Failed to update password",
-                duration: 3000,
+                duration: 5000,
                 variant: response.success ? "success" : "destructive"
             })
             if(response.success){

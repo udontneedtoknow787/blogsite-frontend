@@ -55,7 +55,7 @@ export const RequestOTPPage = () => {
             // alert(response.message)
             toast(response.message, {
                 description: response.success ? "OTP sent successfully" : "Failed to send OTP",
-                duration: 3000,
+                duration: 5000,
                 variant: response.success ? "success" : "destructive"
             })
             if(response.success){
@@ -63,7 +63,11 @@ export const RequestOTPPage = () => {
             }
         } catch (error) {
             setWaiting(false)
-            alert("An error occurred while requesting OTP. Please try again after sometime.")
+            toast("An error occurred while sending OTP", {
+                description: "Please try again later.",
+                duration: 5000,
+                variant: "destructive"
+            })
             console.error(error)
             navigate("/")
         }
